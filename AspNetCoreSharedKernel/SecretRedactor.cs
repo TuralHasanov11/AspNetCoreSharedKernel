@@ -17,3 +17,4 @@ public class SecretRedactor : Redactor
         return SecretValue.Length;
     }
 }
+
