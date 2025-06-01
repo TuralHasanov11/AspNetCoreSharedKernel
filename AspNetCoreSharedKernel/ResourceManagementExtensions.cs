@@ -1,6 +1,6 @@
 ﻿namespace AspNetCoreSharedKernel;
 
-public static class FunctionalExtensions
+public static class ResourceManagementExtensions
 {
     public static TOutput Using<TOutput, TDisposable>(
         TDisposable disposable,
@@ -10,6 +10,17 @@ public static class FunctionalExtensions
         using (disposable)
         {
             return func(disposable);
+        }
+    }
+
+    public static void Using<TDisposable>(
+        TDisposable disposable,
+        Action<TDisposable> func)
+        where TDisposable : IDisposable
+    {
+        using (disposable)
+        {
+            func(disposable);
         }
     }
 }

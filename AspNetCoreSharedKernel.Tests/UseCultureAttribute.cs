@@ -5,7 +5,7 @@ using Xunit.v3;
 namespace AspNetCoreSharedKernel.Tests;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class UseCultureAttribute : BeforeAfterTestAttribute
+public sealed class UseCultureAttribute : BeforeAfterTestAttribute
 {
     private readonly Lazy<CultureInfo> _culture;
     private readonly Lazy<CultureInfo> _uiCulture;
