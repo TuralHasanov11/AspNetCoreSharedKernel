@@ -1,6 +1,6 @@
-﻿using Ardalis.Result;
+﻿using System.Security.Cryptography;
+using Ardalis.Result;
 using Microsoft.AspNetCore.DataProtection;
-using System.Security.Cryptography;
 
 namespace AspNetCoreSharedKernel;
 

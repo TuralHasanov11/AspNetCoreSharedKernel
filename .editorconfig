@@ -538,7 +538,7 @@ dotnet_diagnostic.CA1713.severity = warning
 dotnet_diagnostic.CA1714.severity = error
 
 # Identifiers should have correct prefix
-dotnet_diagnostic.CA1715.severity = error
+dotnet_diagnostic.CA1715.severity = suggestion
 
 # Identifiers should not match keywords
 dotnet_diagnostic.CA1716.severity = warning

@@ -7,10 +7,10 @@ public static class TaskExtensions
         using var cts = new CancellationTokenSource();
 
         // Create the timeout task (don't await it)
-        var timeoutTask = Task<TResult>.Delay(timeout, cts.Token);
+        var timeoutTask = Task.Delay(timeout, cts.Token);
 
         // Run the task and timeout in parallel, return the Task that completes first
-        var completedTask = await Task<TResult>.WhenAny(task, timeoutTask).ConfigureAwait(false);
+        var completedTask = await Task.WhenAny(task, timeoutTask).ConfigureAwait(false);
 
         if (completedTask == task)
         {
