@@ -6,7 +6,7 @@ using static AspNetCoreSharedKernel.Functional.F;
 namespace AspNetCoreSharedKernel.Functional.Exercises.Chapter03;
 
 
-public static partial class Exercises
+internal static partial class Exercises
 {
     // 1 Write a generic function that takes a string and parses it as a value of an enum. It
     // should be usable as follows:
@@ -22,7 +22,7 @@ public static partial class Exercises
     // new List<int>().Lookup(isOdd) // => None
     // new List<int> { 1 }.Lookup(isOdd) // => Some(1)
 
-    public static Option<TSource> Lookup<TSource>(this IEnumerable<TSource> source,
+    internal static Option<TSource> Lookup<TSource>(this IEnumerable<TSource> source,
         Func<TSource, bool> predicate)
     {
         foreach (var item in source)
@@ -41,13 +41,13 @@ public static partial class Exercises
     // - Implicit conversion to string, so that it can easily be used with the typical API
     // for sending emails
 
-    public partial class Email
+    internal partial class Email
     {
         private string Value { get; }
 
         private Email(string value) => Value = value;
 
-        public static Option<Email> Create(string s)
+        internal static Option<Email> Create(string s)
            => Regex().IsMatch(s)
               ? Some(new Email(s))
               : None;
@@ -70,18 +70,18 @@ public static partial class Exercises
 // Assume settings are of type string, numeric or date.) Can this
 // implementation help you to test code that relies on settings in a
 // `.config` file?
-public class AppConfig
+internal class AppConfig
 {
     private readonly NameValueCollection _source;
 
-    //public AppConfig() : this(ConfigurationManager.AppSettings) { }
+    //internal AppConfig() : this(ConfigurationManager.AppSettings) { }
 
-    public AppConfig(NameValueCollection source)
+    internal AppConfig(NameValueCollection source)
     {
         this._source = source;
     }
 
-    public Option<T> Get<T>(string name)
+    internal Option<T> Get<T>(string name)
     {
         var value = _source[name];
 
@@ -93,7 +93,7 @@ public class AppConfig
         return Some((T)(object)value);
     }
 
-    public T Get<T>(string name, T defaultValue)
+    internal T Get<T>(string name, T defaultValue)
     {
         Option<T> value = Get<T>(name);
 

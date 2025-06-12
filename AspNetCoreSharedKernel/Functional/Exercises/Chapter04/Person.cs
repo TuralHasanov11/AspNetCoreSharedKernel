@@ -1,16 +1,16 @@
 ﻿namespace AspNetCoreSharedKernel.Functional.Exercises.Chapter04;
 
-public class Person
+internal class Person
 {
-    public string FirstName { get; }
-    public string LastName { get; }
+    internal string FirstName { get; }
+    internal string LastName { get; }
 
-    public decimal Earnings { get; set; }
-    public Option<int> Age { get; set; }
+    internal decimal Earnings { get; set; }
+    internal Option<int> Age { get; set; }
 
-    public Person() { }
+    internal Person() { }
 
-    public Person(string firstName, string lastName)
+    internal Person(string firstName, string lastName)
     {
         FirstName = firstName;
         LastName = lastName;

@@ -2,21 +2,21 @@
 
 namespace AspNetCoreSharedKernel.Functional.Exercises.Chapter06;
 
-public static class Exercises
+internal static class Exercises
 {
     // 1. Write a `ToOption` extension method to convert an `Either` into an
     // `Option`. Then write a `ToEither` method to convert an `Option` into an
     // `Either`, with a suitable parameter that can be invoked to obtain the
     // appropriate `Left` value, if the `Option` is `None`. (Tip: start by writing
     // the function signatures in arrow notation)
-    public static Option<R> ToOption<R, L>(this Either<L, R> either)
+    internal static Option<R> ToOption<R, L>(this Either<L, R> either)
     {
         return either.Match(
             left: l => None,
             right: r => Some(r));
     }
 
-    public static Either<L, R> ToEither<L, R>(this Option<R> option, Func<L> left)
+    internal static Either<L, R> ToEither<L, R>(this Option<R> option, Func<L> left)
     {
         return option.Match<Either<L, R>>(
             None: () => left(),
@@ -40,7 +40,7 @@ public static class Exercises
     // run the given function in a `try/catch`, returning an appropriately
     // populated `Either`.
 
-    public static Either<L, R> Safely<L, R>(Func<R> func, Func<Exception, L> except)
+    internal static Either<L, R> Safely<L, R>(Func<R> func, Func<Exception, L> except)
     {
         try
         {
@@ -55,7 +55,7 @@ public static class Exercises
     // 4. Write a function `Try` of type (() → T) → Exceptional<T> that will
     // run the given function in a `try/catch`, returning an appropriately
     // populated `Exceptional`.
-    public static Exceptional<T> Try<T>(Func<T> func)
+    internal static Exceptional<T> Try<T>(Func<T> func)
     {
         try
         {
@@ -63,7 +63,7 @@ public static class Exercises
         }
         catch (Exception ex)
         {
-            return new Exception<T>(ex);
+            return new Exceptional<T>(ex);
         }
     }
 }

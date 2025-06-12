@@ -4,6 +4,8 @@
 public interface IInTransaction
 {
     Task<T> Run<T>(Func<T> action);
+
+    Task Run(Action action);
 }
 
 public abstract class InTransaction(DbContext dbContext) : IInTransaction
@@ -14,7 +16,7 @@ public abstract class InTransaction(DbContext dbContext) : IInTransaction
 
         try
         {
-            var result = action.Invoke();
+            var result = action();
 
             if (dbContext.ChangeTracker.HasChanges())
             {
@@ -30,5 +32,10 @@ public abstract class InTransaction(DbContext dbContext) : IInTransaction
             await transaction.RollbackAsync();
             throw;
         }
+    }
+
+    public async Task Run(Action action)
+    {
+        await Run(action);
     }
 }

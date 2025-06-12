@@ -2,16 +2,16 @@
 using static AspNetCoreSharedKernel.Functional.F;
 namespace AspNetCoreSharedKernel.Functional.Examples.Chapter03;
 
-public readonly struct Age
+internal readonly struct Age
 {
-    public int Value { get; }
+    internal int Value { get; }
 
-    public static Option<Age> Of(int value)
+    internal static Option<Age> Of(int value)
     {
         return IsValid(value) ? Some(new Age(value)) : (Option<Age>)None;
     }
 
-    public Age(int value)
+    internal Age(int value)
     {
         if (value < 0)
         {
@@ -20,7 +20,7 @@ public readonly struct Age
         Value = value;
     }
 
-    public static bool IsValid(int value) => value is >= 0 and <= 120;
+    internal static bool IsValid(int value) => value is >= 0 and <= 120;
 
     public static bool operator <(Age l, Age r) => l.Value < r.Value;
     public static bool operator >(Age l, Age r) => l.Value > r.Value;

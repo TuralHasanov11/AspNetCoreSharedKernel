@@ -1,13 +1,13 @@
 ﻿using static AspNetCoreSharedKernel.Functional.F;
 namespace AspNetCoreSharedKernel.Functional.Examples.Chapter05;
 
-public class Chapter5_TransfersController
+internal class Chapter5_TransfersController
 {
     private readonly IValidator<MakeTransfer> validator;
     private readonly IRepository<AccountState> accounts;
     private readonly ISwiftService swift;
 
-    public void MakeTransfer(MakeTransfer transfer)
+    internal void MakeTransfer(MakeTransfer transfer)
        => Some(transfer)
           .Map(Normalize)
           .Where(validator.IsValid)
@@ -29,15 +29,15 @@ public class Chapter5_TransfersController
 
 // domain model
 
-public class AccountState
+internal class AccountState
 {
-    public decimal Balance { get; }
-    public AccountState(decimal balance) { Balance = balance; }
+    internal decimal Balance { get; }
+    internal AccountState(decimal balance) { Balance = balance; }
 }
 
-public static class Account
+internal static class Account
 {
-    public static Option<AccountState> Debit
+    internal static Option<AccountState> Debit
        (this AccountState acc, decimal amount)
        => (acc.Balance < amount)
           ? F.None
@@ -47,7 +47,7 @@ public static class Account
 
 // dependencies
 
-public interface IRepository<T>
+internal interface IRepository<T>
 {
     Option<T> Get(Guid id);
     void Save(Guid id, T t);
@@ -58,16 +58,16 @@ internal interface ISwiftService
     void Wire(MakeTransfer transfer, AccountState account);
 }
 
-public interface IValidator<T>
+internal interface IValidator<T>
 {
     bool IsValid(T t);
 }
 
-public abstract class Command
+internal abstract class Command
 {
-    public DateTime Timestamp { get; set; }
+    internal DateTime Timestamp { get; set; }
 
-    public T WithTimestamp<T>(DateTime timestamp)
+    internal T WithTimestamp<T>(DateTime timestamp)
        where T : Command
     {
         T result = (T)MemberwiseClone();
@@ -76,15 +76,15 @@ public abstract class Command
     }
 }
 
-public class MakeTransfer : Command
+internal class MakeTransfer : Command
 {
-    public Guid DebitedAccountId { get; set; }
+    internal Guid DebitedAccountId { get; set; }
 
-    public string Beneficiary { get; set; }
-    public string Iban { get; set; }
-    public string Bic { get; set; }
+    internal string Beneficiary { get; set; }
+    internal string Iban { get; set; }
+    internal string Bic { get; set; }
 
-    public DateTime Date { get; set; }
-    public decimal Amount { get; set; }
-    public string Reference { get; set; }
+    internal DateTime Date { get; set; }
+    internal decimal Amount { get; set; }
+    internal string Reference { get; set; }
 }

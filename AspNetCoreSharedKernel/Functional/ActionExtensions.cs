@@ -3,9 +3,9 @@ using Unit = System.ValueTuple;
 
 namespace AspNetCoreSharedKernel.Functional;
 
-public static class ActionExtensions
+internal static class ActionExtensions
 {
-    public static Func<Unit> ToFunc(this Action action)
+    internal static Func<Unit> ToFunc(this Action action)
     {
         return () =>
         {
@@ -14,7 +14,7 @@ public static class ActionExtensions
         };
     }
 
-    public static Func<T, Unit> ToFunc<T>(this Action<T> action)
+    internal static Func<T, Unit> ToFunc<T>(this Action<T> action)
     {
         return t =>
         {
@@ -23,7 +23,7 @@ public static class ActionExtensions
         };
     }
 
-    public static Func<T1, T2, Unit> ToFunc<T1, T2>(this Action<T1, T2> action)
+    internal static Func<T1, T2, Unit> ToFunc<T1, T2>(this Action<T1, T2> action)
     {
         return (T1 t1, T2 t2) => { action(t1, t2); return new(); };
     }
